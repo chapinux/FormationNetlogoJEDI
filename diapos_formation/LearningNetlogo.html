@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <meta charset="utf-8">
+
+  <title>LearningNetlogo</title>
+
+  <meta name="description" content="Netlogo training tutorial">
+  <meta name="author" content="Paul Chapron and Sébastien Rey-Coyrehourcq">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="LearningNetlogo_fichiers/reveal.css">
+  <link rel="stylesheet" href="LearningNetlogo_fichiers/openmole.css" id="theme">
+  <link rel="stylesheet" href="LearningNetlogo_fichiers/theme.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="LearningNetlogo_fichiers/zenburn.css">
+
+
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <script>
+  if( window.location.search.match( /print-pdf/gi ) ) {
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = 'css/print/pdf.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  }
+  </script>
+ <!--<script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>-->
+  <!--        remove default borders around images-->
+  <style>
+  .reveal section img {
+    background:none;
+    border:none;
+    box-shadow:none;
+  }
+
+  #logos {
+    width: 960px; // Change this according to the width you want.
+    height: 500px; // Change this as well
+    margin: 0 auto 0 auto;
+    text-align: center; // Will center the images contained in the div
+  }
+  </style>
+</head>
+
+<body style="transition: -webkit-transform 0.8s ease 0s;">
+
+  <div class="reveal fade center" role="application" data-transition-speed="default" data-background-transition="fade">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(1.18029);">
+
+      <section style="top: 0px; display: block;" class="present">
+
+        <img src="LearningNetlogo_fichiers/netlogo-banner.jpg" style="position:top" width="100%">
+        <h2>NetLogo JEDI Training Session #1</h2> 
+        March 30<sup style="font-size:70%">th</sup> 2017
+        <br><br>
+        Paul Chapron - Sebastien Rey-Coyrehourcq
+        <img src="LearningNetlogo_fichiers/isccube.png" style="margin: 0px auto;display:block" width="30%">
+
+
+      </section>
+
+
+<section style="top: 0px; display: block;" class="future" aria-hidden="true" hidden="">
+  <h1>Prologue</h1>
+  <br>
+  <br>
+  <b>Everything</b> you need to know is at <a href="https://ccl.northwestern.edu/netlogo/docs/">https://ccl.northwestern.edu/netlogo/docs/</a> 
+<br><br>
+Models of this training session (and some other cool examples) are at : <a href="https://github.com/ISCPIF/JEDI/tree/master/Netlogo/models_seance_1">https://github.com/ISCPIF/JEDI/tree/master/Netlogo/models_seance_1</a>
+<br><br>
+<p style="font-size: 60%">
+Full content of the training is here <a href="https://github.com/ISCPIF/JEDI"> https://github.com/ISCPIF/JEDI</a>
+</p></section>
+
+<section style="top: 147px; display: block;" class="future" aria-hidden="true" hidden="">
+  <h2>Prologue part 2</h2>
+  <br>
+  <br>
+  Always keep a tab with the <b>Netlogo Dictionnary</b> <a href="https://ccl.northwestern.edu/netlogo/docs/dictionary.html">https://ccl.northwestern.edu/netlogo/docs/dictionary.html</a> 
+<br><br>
+
+</section>
+
+      <section style="top: 20.5px; display: none;" class="future" aria-hidden="true" hidden="">
+       <h1> Outline</h1>  
+       <ul>
+        <li> <b> What is Netlogo ? </b></li>
+        <li> A world of Agents</li>
+         <li> First steps</li>
+          <li> Patches</li>
+        <li> Turtles</li>
+        <li> Networks</li>
+        <li> Interactions</li>
+        <li> Inputs / Outputs </li>
+        <li> Extensions</li>
+      </ul>
+
+
+    </section>
+
+    <section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+      <h2>What is NetLogo ?</h2> 
+      <img src="LearningNetlogo_fichiers/netlogo_logo.png" style="align:left" width="20%">
+    <br>
+      <ul>
+        <li> A programming language </li>
+        <li> A toolkit </li>
+        <li> An Integrated Development Environment </li>
+      </ul>
+      <br><br>
+      for <b>A</b>gent <b>B</b>ased <b>M</b>odels (ABM) 
+      <br><br>
+      <small> Most of content comes from <a href="https://subversion.american.edu/aisaac/notes/netlogo-basics.xhtml">https://subversion.american.edu/aisaac/notes/netlogo-basics.xhtml</a>
+      </small>
+
+    </section>
+
+
+ <section style="top: 26px; display: none;" class="future" aria-hidden="true" hidden="">
+      <h2>ABM</h2> 
+      <br><br>
+      <ul>
+        <li> Entities </li>
+        <li> Environment </li>
+        <li> Interactions </li>
+      </ul>
+      <br><br>
+
+      <img src="LearningNetlogo_fichiers/kid.png" style=" float:left;" width="15%">
+<p align="justify">
+You tell entities what to do and see what happens.
+
+    </p></section>
+
+ <section style="top: 44px; display: none;" class="future" aria-hidden="true" hidden="">
+      <h2>ABM</h2> 
+      <ul>
+        <li> Entities </li>
+        <li> Environment </li>
+        <li> Interactions </li>
+      </ul>
+      <br><br>
+
+      <img src="LearningNetlogo_fichiers/junior.png" style=" float:left;" width="20%">
+
+<p align="justify">
+You describe how entities <b>interact</b> in and with their environment, and observe the resulting <b>phenomena</b>.
+</p>
+</section>
+
+ <section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+      <h2>ABM</h2> 
+      <ul>
+        <li> Entities </li>
+        <li> Environment </li>
+        <li> Interactions </li>
+      </ul>
+      <br><br>
+
+
+      <img src="LearningNetlogo_fichiers/senior.png" style="float:left;" width="30%">
+
+<p align="justify">
+You <b>program the behavior</b> of software "agents", all operating independently.
+</p><p align="justify">
+
+
+It allows to explore the connection between the <b>micro-level behavior</b> of individuals and the <b>macro-level patterns</b> that emerge from their interaction. 
+
+    </p></section>
+
+
+<section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+  <iframe src="LearningNetlogo_fichiers/deck-8.html" style=" position: bottom; height: 80vh; width: 100%; " name="targetframe" allowtransparency="false" scrolling="no" frameborder="0">  
+    </iframe>
+</section>
+
+
+
+
+
+<section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+  
+<h2>Netlogo is good for you</h2>
+<br> <br> 
+
+
+
+      <ul>
+        <li>Suited for modeling complex systems</li>
+        <li> Simplicity of use</li>
+        <li> Simplicity of language </li>
+        <li> Clear extensive documentation </li>
+        <li> Bundled with a lot of models </li>
+        <li> Multi-platforms </li>
+      </ul>
+    <p>
+       <img src="LearningNetlogo_fichiers/thumbs-up.jpg" style="position: relative ; bottom: 20vh ;  z-index: -1;" width="70%">
+      
+
+
+</p></section>
+
+
+<section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+  <iframe src="LearningNetlogo_fichiers/deck-8_002.html" style=" position: bottom; height: 80vh; width: 100%; " name="targetframe" allowtransparency="false" scrolling="no" frameborder="0">  
+    </iframe>
+</section>
+
+
+    <section style="top: 0px; display: none;" class="future" aria-hidden="true" hidden="">
+      <h2>Various environments for agents</h2>
+      <br><br>
+     
+       <img src="LearningNetlogo_fichiers/network_ABM.gif" width="33%">
+       <img src="LearningNetlogo_fichiers/grid_ABM.gif" width="32%">
+        <img src="LearningNetlogo_fichiers/terrainnetlogo.gif" width="32%">
+
+
+<br><br>
+
+<small>sources : giphy.com , google images and <a href="http://www.cs.us.es/%7Efsancho/?e=137">http://www.cs.us.es/~fsancho/?e=137</a> </small>
+    </section>
+
+
+
+ <section style="top: 48px; display: none;" class="future" aria-hidden="true" hidden="">
+ <h2>Outline</h2>
+  <ul>
+   <li> What is Netlogo ? </li>
+   <li><b> A world of Agents</b></li>
+    <li> First steps</li>
+     <li> Patches</li>
+   <li> Turtles</li>
+   <li> Networks</li>
+   <li> Interactions</li>
+   <li> Inputs / Outputs </li>
+   <li> Extensions</li>
+ </ul>
+
+</section>
+
+
+
+<section style="top: 87.5px; display: none;" class="future" aria-hidden="true" hidden="">
+  <h2>A World of Agents </h2>
+<p>
+Pretty much everything is agent
+</p><p>
+</p><ul>
+  <li><b>Turtles</b>: Mobile Agents </li>
+  <li><b>Patches</b>: Discrete surface units of the World, location of turtles </li>
+  <li><b>Links</b>: Edges of a graph connecting turtles</li>
+  <li><b>The Observer</b>: the meta-agent that rules the world or Netlogo</li>
+</ul>
+
+
+
+</section>
+
+
+<section style="top: 87.5px; display: none;" class="future" aria-hidden="true" hidden="">
+  <h2>Building an ABM model</h2>
+
+is defining
+ <p>
+</p><ul>
+<li> the world characteristics (e.g. size) </li>
+<li> Global variables (e.g. temperature)</li>
+<li> Agents (turtles) variables (e.g. age) </li>
+<li> the behavior of turtles</li>
+<li> Inputs (e.g. parameters)</li>
+<li> Outputs (e.g. monitors)</li>
+</ul>
+</section>
+
+
+
+
+ <section style="top: 48px; display: none;" class="future" aria-hidden="true" hidden="">
+ <h2>Outline</h2>
+  <ul>
+   <li> What is Netlogo ? </li>
+   <li> A world of Agents</li>
+    <li> <b> First steps</b></li>
+     <li> Patches</li>
+   <li> Turtles</li>
+   <li> Networks</li>
+   <li> Interactions</li>
+   <li> Inputs / Outputs </li>
+   <li> Extensions</li>
+ </ul>
+
+</section>
+
+
+<section style="top: 196.5px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Netlogo GUI</h2>
+<b>
+<ul>
+  <li>Interface Panel</li>
+  <li>Info Panel</li>
+  <li>Code Panel</li> 
+</ul>
+</b>
+</section>
+
+
+
+<section style="top: 55px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h1>First steps</h1>
+<br><br>
+Open an existing model and play around with it 
+<p>
+OR 
+</p><p>
+Create the first model from scratch
+</p><p>
+
+?
+
+</p></section>
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Existing models</h2>
+
+<ul> 
+<li> 
+  File -&gt; Models Library. Pick one. 
+</li>
+<li> 
+Mess with buttons, sliders &amp; observe consequences on behavior
+  </li>
+<li>
+  Look at the Info Tab
+</li>
+<li>
+Look at The Code
+</li>
+</ul>
+Suggestions: <p>
+
+</p><div style="float: left; width: 50%">
+<small>
+
+<ul>
+<li> Fire</li>  
+<li> Mousetraps</li>
+<li> Wolf Sheep Predation </li>
+<li>Life </li>
+<li>Fireworks</li>
+<li> Flocking</li>
+<li> Moths</li>
+
+</ul>
+</small>
+
+</div>
+
+<div style="float: right; width: 50%">
+<small>
+
+<ul>
+<li>Preferential Attachment</li>
+<li>Sunflower </li>
+<li> Game of Life </li>
+<li>Patch Clusters Example </li>
+<li>Bounce Example </li>
+<li>Hatch Example</li>
+<li>Network Example</li>
+
+</ul>
+</small></div><small>
+</small>
+
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Model from scratch : Code</h3>
+
+
+  <ol><li>Procedure <b>setup</b> : clear everything and create some turtles (20)</li>
+
+
+    <p style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+
+      </p><pre>to setup 
+  clear-all   
+  create-turtles 20 
+end
+      </pre>
+
+    <li> Procedure <b>move</b> : ask the turtles to move forward (1 unit)</li>
+
+  <p style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+
+    </p><pre>to move 
+  ask turtles [forward 1] 
+end
+    </pre>
+  <p></p>
+  </ol>
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Model from scratch : Interface</h3>
+<br>
+<p align="left">
+Add a button (right click), type <b>setup</b> in the commands section
+<br><br>
+Add a button, type <b>move</b> in the commands section
+<br><br>
+</p><div style="color: #ff5c33">Button commands have to match procedures names !</div>
+
+<p></p>
+</section>
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Notice the colors in the code:</h2>
+<p align="left">
+ <font color="#339966">greenish </font>  for reserved keywords  ()
+</p><p align="left">
+ <font color="#0033cc">blue</font> for commands 
+</p><p align="left">
+ <font color="#cc66ff">violet </font> for everything built-in : agents default variables, functions, agentsets   
+</p><p align="left">
+ <font color="#cc9900">orange </font> for hard-coded values  
+</p><p align="left">
+<font color="#999999">grey</font> for comments
+</p><p align="left">
+
+black for the name of things you declare : variables , procedures
+</p></section>
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Editing the Interface</h3>
+<br>
+
+<ul>
+  <li>Interface panel</li>
+  <li>Select / move / edit / delete stuff with <b>right click</b></li>
+  <li>World characteristics via the <b>Settings</b> Button</li> 
+  <li> Mind the naming of the elements </li>
+</ul>
+
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Adding stuff in the GUI : Inputs</h3>
+
+<ul>
+  <li><b>Buttons</b>:&nbsp;to call procedures </li>
+  <li><b>Sliders</b>: to define a global numeric variable in a domain</li>
+  <li><b>Switch</b>: to define a boolean global variable </li>
+  <li><b> Chooser</b>: to define a global variable among a list of choices </li>
+  <li><b>Input</b>: for user Input</li>
+  <li>(<b>Note</b>: text zone)</li>
+
+
+</ul>
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Adding stuff in the GUI : Outputs</h3>
+
+
+<ul>
+  <li><b>Monitors</b>:&nbsp;display value from a reporter (variable, procedure) </li>
+  <li><b>Plots</b>: shows data </li>
+  <li><b>Output</b>: scrolling text area with logs</li>
+
+
+</ul>
+
+</section>
+
+
+ <section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+ <h2>Outline</h2>
+  <ul>
+   <li> What is Netlogo ? </li>
+   <li> A world of Agents</li>
+   <li> First steps</li>
+   <li> <b>Patches</b></li>
+   <li> Turtles</li>
+   <li> Networks</li>
+   <li> Interactions</li>
+   <li> Inputs / Outputs </li>
+   <li> Extensions</li>
+ </ul>
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  
+The World is divided into <b>patches</b>, discrete surface units.
+<br>
+<br>
+<ul>
+  <li><b>automatically created</b> at start up</li>
+
+<li>    laid out in a rectangular <b>grid</b></li> 
+
+<li>    centered at <b>integer locations</b> </li> 
+
+    <li>immobile</li>
+
+    <li><b>identified by a fixed location</b> : No ids (e.g.  patch -5 8 )</li>
+<li>colored in black by default</li>
+<li> World default size : 33 patches wide and 33 patches high</li>
+</ul>
+</section>
+
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h1>Trial #1</h1>
+
+How to do that 
+
+<p>
+<img src="LearningNetlogo_fichiers/square.png" style="border:2px solid black" width="30%">
+<img src="LearningNetlogo_fichiers/damier.png" style="border:2px solid black" width="30%">
+<img src="LearningNetlogo_fichiers/quadrants.png" style="border:2px solid black" width="30%">
+
+</p><p>
+asking patches to turn white ?
+
+
+</p></section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #1 Tips</h3>
+
+Patches have built-in variables :
+<ul>
+  <li><b>pxcor </b> the x-coordinate of the patch </li>
+  <li><b>pycor </b> the y-coordinate of the patch </li>
+  <li><b>pcolor</b> the color of the patch </li>
+</ul>
+
+<br><br>
+Try :
+    <p style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+
+      </p><pre>ask patches [ set pcolor white ]
+      </pre>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #1 Learnings</h3>
+<br>
+<ul>
+  <li><b>ask </b> tell the agents what to do  </li>
+  <li>Syntax : <div style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+ask some-agents [do-something]
+<p><br>
+  </p></div></li><li><b>set</b> changes the value of a variable </li>
+  <li>Syntax : <div style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+set my-variable value
+</div></li></ul>
+
+</section>
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #1 Tips</h3>
+
+
+<p align="left">
+Patches is a <b>set</b> (of patches)
+<br>
+Sets elements can be <b>selected</b> by providing a <b>boolean condition</b> via the keyword <b>with</b>.    
+<br>
+</p><p><br>
+Syntax : </p><div style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+my-set <font color="#cc66ff"> with </font> [my-condition]
+<p></p>
+
+<br>
+Try:
+<p style="font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;" align="left">
+
+      </p><pre>ask patches with [pxcor &gt; 0 ]  [ set pcolor white ]
+      </pre>
+
+</div></section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2> Trial #1 solution</h2>
+
+  Look at the model  <b>Dessin_patches.nlogo</b> and its code.
+</section>
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #1 Learnings</h3>
+
+Patches have built-in variables :
+<br><p>
+</p><ul>
+  <li><b>pxcor </b> the x-coordinate of the patch </li>
+  <li><b>pycor </b> the y-coordinate of the patch </li>
+  <li><b>pcolor</b> the color of the patch (black by default)</li>
+  <li><b>plabel</b> the label of the patch (empty by default)</li>
+  <li><b>plabelcolor</b> the color of the patch (white by default)</li>
+</ul>
+<br>
+<br>
+
+Look at the model <b>patches.nlogo</b> to display coordinates as labels or display coordinates as colors shades.  
+
+</section>
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2> Going further with patches</h2>
+<p align="left">
+<br>
+  Patches can have their <b>own</b> attributes, declared at the beginning of the code : 
+<br>
+</p><pre>patches-own [my-patch-attribute1 my-patch-attribute2]
+</pre>  
+<p align="left">
+
+Patches are agents, and can interact with the others : patches, turtles.
+eg 
+</p><pre>clear-all
+ask patches [sprout 1]
+</pre>
+<p align="left">
+
+Look at the patches section of the <a href="https://ccl.northwestern.edu/netlogo/docs/dictionary.html">Netlogo dictionnary</a>, the <b>turtle_patch_interaction.nlogo</b> model , or the  <b>Diffusion_on_patches.nlogo</b> model 
+</p>
+
+
+</section>
+
+ <section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+ <h2>Outline</h2>
+  <ul>
+   <li> What is Netlogo ? </li>
+   <li> A world of Agents</li>
+   <li> First steps</li>
+   <li> Patches</li>
+   <li> <b>Turtles</b></li>
+   <li> Networks</li>
+   <li> Interactions</li>
+   <li> Inputs / Outputs </li>
+   <li> Extensions</li>
+ </ul>
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2> Turtles</h2>
+  <img src="LearningNetlogo_fichiers/nemo.jpg" style="width: 30%;">
+  <img src="LearningNetlogo_fichiers/tmnt.jpg" style="width: 33%;">
+  <img src="LearningNetlogo_fichiers/franklin.jpg" style="width: 33%;">
+
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+
+
+  Turtles are:
+  <ul>
+    <li> <b>user created</b> (not automatically created at start up)</li>
+    <li> located at <b>floating-point locations</b> within the dimensions of the world : attribute <b>xcor</b> and <b>ycor</b></li>
+    <li> mobile </li>
+    <li> identified by the order of creation: attribute <b>who</b> </li>
+    <li>have a <b>heading</b> attribute (angle)</li>
+  </ul>
+
+  <br>
+  <p align="left">
+
+    Visual display:
+    </p><ul>
+      <li>colored, at random by default. attribute <b>color</b></li>
+      <li>displayed in the model’s Graphics Window</li>
+      <li>drawn <b>on top</b> of the patches</li>
+      <li>can <b>draw</b> using pen </li>
+    </ul>
+  <p></p>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3> TMNT </h3>
+<pre>turtles-own [name age genome skill]
+create 4 [
+          set age 12 + random 4
+          set skill "ninja"
+          set genome "mutant"  
+        ]
+ask turtle 0 [ 
+  set name "Leonardo"
+  set color blue
+  ]
+ask turtle 1 [ 
+  set name "Raphaël"
+  set color red
+  ]
+ask turtle 2 [ 
+  set name "Michelangelo"
+  set color orange
+  ]
+ask turtle 3 [ 
+  set name "Donatello"
+  set color violet
+  ]
+
+</pre>
+</section>
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #2</h3>
+  <p align="left">
+Setup:<br>
+Create <b><i>n</i></b> turtles <b>randomly located</b>
+<br><br>
+Go: <br>
+ <b>Random walk</b> (i.e. make them move randomly).
+</p>
+<br>
+<div style="color: #ff5c33">No teleport !</div>
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #2 Hints</h3>
+  <p align="left">
+Location of turtles is achieved by setting their <b>xcor </b> and <b>ycor</b> attributes. 
+<br>
+Random turtles locations are built-in : <b>random-xcor</b> and <b>random-ycor</b>
+<br><br>
+Either
+</p><pre>  set xcor random-xcor
+  set ycor random-ycor
+</pre>
+<p align="left">
+or
+</p><pre>  setxy random-xcor yrandom-cor
+</pre>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #2 Hints</h3>
+  <p align="left">
+Movement is combination of <b>rotation</b> and <b>translation</b>
+<br>
+<br>
+Rotation is either changing the <b>heading</b> attribute or rotate <b>left</b>  or <b>right</b> by a number of degrees (built in commands) 
+<br>
+<br>
+</p><pre>  ask turtle 42 [right 45 ]</pre>
+
+
+<p align="left">
+
+or
+</p><pre>  ask turtle 42 [ set heading  heading + 45]
+</pre>
+
+<p align="left">
+heading = angle between 0 and 360
+<br>North is 0
+</p></section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Trial #2 Hints</h3>
+  <p align="left">
+Movement is combination of <b>rotation</b> and <b>translation</b>
+<br>
+<br>
+Translation is moving <b>forward</b> or <b>backward</b>  by a number of steps (built in commands) in the direction of turtle heading 
+<br>
+
+</p><pre>  ask turtle 42 [forward 2.5]</pre>
+<br>
+
+<p align="left">
+
+or, use <b>jump</b> (which is basically teleporting) 
+</p><pre>  ask turtle 42 [ repeat 10 jump 0.25]
+</pre>
+<p align="left">
+<br>
+Moving is teleporting smoothly (only in a discrete world !)
+
+</p></section>
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Trial #2 Solution</h3>
+
+Look at the <b>random-walk.nlogo</b> model
+<br><br>
+Drawing tracks is achieved by the command <b>pen-down</b><br>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Trial #2 Learnings</h3>
+<ul>
+  <li>Turtles are mobile agents</li>
+  <li>Turtles can have their own user-defined attributes</li>
+  <li>Turtles can be translated and rotated</li>
+</ul>
+
+</section>
+
+    <section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+       <h1> Outline</h1>  
+       <ul>
+        <li> What is Netlogo ? </li>
+        <li> A world of Agents</li>
+         <li> First steps</li>
+          <li> Patches</li>
+        <li> Turtles</li>
+        <li> <b>Networks</b></li>
+        <li> Interactions</li>
+        <li> Inputs / Outputs </li>
+        <li> Extensions</li>
+      </ul>
+</section>  
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Networks in netlogo</h2>
+
+  <ul>
+    <li>Turtles are <b>nodes</b></li>
+    <li><b>Links</b> are <b>agents</b> connecting nodes</li>
+    <li>that's  all</li>
+  </ul>
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Links </h2>
+
+<ul>
+  <li>Directed or undirected </li>
+  <li>Can have their own attributes (e.g. weight)</li>
+  <li> have acces to their nodes : <pre style="display: inli"><b>end1</b> and <b>end2</b> or <b>both-ends</b></pre>
+</li></ul>
+<img src="LearningNetlogo_fichiers/links.jpg" width="50%">
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Links creation</h2>
+<ul>
+<li><pre>create-link-to  </pre></li>
+<li><pre>create-links-to  </pre></li>
+<li><pre>create-link-from  </pre></li>
+<li><pre>create-links-from  </pre></li>
+<li><pre>create-link-with  </pre></li>
+<li><pre>create-links-with  </pre></li>
+</ul>
+<p align="left">
+<br>Example : <br>
+</p><pre>ask turtles[
+   create-link-to one-of other turtles
+ ]
+end</pre>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden=""><h2>  Things are getting harder
+</h2>
+<br><br>
+To understand:
+<pre>create-link-to one-of other turtles</pre>
+
+We must introduce <b>agentsets</b>
+
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h2>Agentsets</h2>
+  <p align="left">
+Agentsets are <b>sets of agents</b>
+</p>
+<img src="LearningNetlogo_fichiers/areyoukiddingme.png" width="15%">
+<p style="font-size: 70%" align="left">
+Agentsets are used to define things like <i>"some agents", "agents with this and that", "agent do something to each other"</i>
+<br><br>
+Common agentsets :
+</p><ul style="float: left; font-size: 70%">
+  <li>turtles, patches , links</li>
+  <li> turtles-here, turtle-on, neighbors</li>  
+  <li>link-neighbors, in-link-neighbors, out-link-neighbors</li>
+</ul>
+<p></p>
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h2>Agentsets</h2>
+<br>Various set operations, according to <b>reporters</b> or not
+<pre>one-of
+n-of
+other
+with
+[reporter] of 
+max-one-of [reporter]
+max-n-of [reporter]
+sort-on[reporter]
+count
+member?
+any?
+all?</pre>
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Back to Networks</h2>
+<p align="left">
+Fully connected undirected network :
+</p><pre>ask turtles [create-links-with other turtles]</pre>
+<p align="left">
+
+Random undirected network , <i>n</i> nodes, <i>n</i> links:
+</p><pre>ask turtles [create-links-with one-of other turtles]</pre>
+
+<p align="left">
+Constant degree (4) random network:
+</p><pre>ask turtles [create-links-with n-of 4 other turtles]</pre>
+
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Trial #3</h2>
+  <br>
+  <p align="left">
+  Build a <b>preferential attachment</b> network generator.
+  <br><br>
+  Starting from an inital network, nodes are added, and <b>preferentially</b> attached to high degree nodes
+  
+
+  <br><br>
+</p><pre>to setup 
+  clear-all
+  set-defaukt-shapes turtles "circle"
+  crt 20 \[
+    create-links-with n-of (1 + random 3) other turtles
+  \]
+end</pre>
+<br>
+
+  <font color="#ff5c33">Resist the urge to copy the code from the model library </font>
+</section>
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Trial #3 hints</h2>
+  <br>
+  <p align="left">
+  Degree is obtained by <b>counting neighbors</b>
+  <br><br>
+  Weighted probability draw is tricky (look on google with "weighted probabilty draw netlogo")
+  <br><br>
+  Observe and admire the simplicity of the model library solution. WHy does it work ? 
+</p></section>
+
+
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>A must-read</h2>
+
+  <br>
+  The doc on the network extension
+<a href="https://ccl.northwestern.edu/netlogo/docs/nw.html">https://ccl.northwestern.edu/netlogo/docs/nw.html</a>
+</section>
+
+
+   <section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+       <h1> Outline</h1>  
+       <ul>
+        <li>  What is Netlogo ? </li>
+        <li> A world of Agents</li>
+         <li> First steps</li>
+          <li> Patches</li>
+        <li> Turtles</li>
+        <li> Networks</li>
+        <li> <b>Interactions</b></li>
+        <li> Inputs / Outputs </li>
+        <li> Extensions</li>
+      </ul>
+
+
+    </section>
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden=""> 
+<h2>Introduction</h2>
+<br><br>
+<p align="left">
+Look at the model <b>turtle_patch_interaction.nlogo</b> where turtles wander in the world, consuming grass of the patches
+<br><br>
+patches are affected by turtles (color)
+<br><br>
+turtles are affected by patches around them
+<br><br>
+</p></section>  
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Trial #4</h3>
+
+Add interaction to the Trial #2
+
+<br><br>
+Interaction:<br>
+When two turtles are <b>close</b>, their colors are set to the <b>mean</b> of their own previous color. 
+</section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Trial #4 hints </h3>
+<p align="left">
+  "Select close turtles" means defining what is "close" : a <b>threshold of distance</b>
+
+</p><ul style="float: left;">
+  <li>By their common location patches (implicit threshold : patch size)</li>
+  <li>By their separating distance (explicit threshold)</li>
+</ul>
+</section>
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Trial #4 hints </h3>
+<p align="left">
+
+One way to obtain the set of turtles at a given  distance Dist of a turtle using selection (with)
+</p><pre> ask turtles [
+    ask turtles with [distance self &lt; Dist]
+      [
+        <i>average your color with color of self  </i>
+      ] 
+]</pre>
+<p align="left">
+Also : <br>
+<b>self</b> means "me" , the agent called
+<br>check out <b>in-radius</b> built-in procedure.
+
+
+</p></section>
+
+
+
+
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Agentsets Introduction : nested asks </h3>
+<p align="left">
+
+
+ 
+You can <b>nest</b> the ask commands.
+<br>
+YOU ask agents to ask <b>SOME OTHERS</b> to do something
+<br>
+
+</p><pre>ask turtles [
+<div style="background-color: #cce6ff;">    <i>do this </i>
+    ask other turtles [
+       <i>do that </i>
+       ]
+    ]
+</div>]</pre>
+<p align="left">
+<br>
+other = every element <b>except the caller</b>
+
+<br>
+<br>
+<br>
+</p></section>
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+<h3>Agensets Introduction : nested asks </h3>
+<p align="left">
+
+
+ 
+You can <b>nest</b> the ask commands.
+<br>
+YOU ask agents to ask <b>SOME OTHERS</b> to do something
+<br>
+
+</p><pre>ask turtles [
+<div style="background-color: #cce6ff;">    <i>do this </i>
+    ask other turtles [<div style="background-color: #e6ccff;">       <i>do that </i></div>       ]
+    ]
+</div>]</pre>
+<p align="left">
+<br>
+other = every element  <b>except the caller</b>
+
+<br>
+<br>
+How many times "this" is done ? <br>
+How many times "that" is done ? (for <i>n</i> turtles)
+
+
+</p></section>
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h2>Interaction insights</h2>
+
+netlogo is perfect for reactive agents e.g.:
+<pre>ask turtles [ 
+  <i>check stimuli</i>
+  ifelse <i>test</i> [...] 
+]  
+</pre>
+
+
+<br><br>
+As a modeler, you don't check yourself the world state and update it, 
+you describe only the agents behaviors and let the world evolve on its own.
+
+</section>
+
+
+
+
+
+<section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+  <h3>Going further with turtles</h3>
+
+<br>
+<b>Breeds</b> allow to specialize turtles
+<br>
+<pre>breed [ sheep a-sheep ]  
+breed [ wolves wolf ]
+sheep-own [wool]
+wolves-own [maw]
+</pre>
+<br>
+Breeds are called like agents :
+<pre>ask wolf 0 [ <i>growl</i> ]
+ask sheep[ <i>say "Baaa"</i>]</pre>
+</section>
+
+
+  <section style="top: 330px; display: none;" aria-hidden="true" class="future" hidden="">
+References :
+<br>
+<small>
+<p align="left">
+<a href="https://subversion.american.edu/aisaac/notes/netlogo-basics.xhtml">https://subversion.american.edu/aisaac/notes/netlogo-basics.xhtml</a>
+
+<a href="https://subversion.american.edu/aisaac/notes/netlogo-intro.xhtml">https://subversion.american.edu/aisaac/notes/netlogo-intro.xhtml</a>
+</p>
+</small>
+  </section>
+
+
+
+
+
+
+</div>
+
+
+
+<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number">1</div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+        
+        NetLogo JEDI Training Session #1 
+        March 30th 2017
+        
+        Paul Chapron - Sebastien Rey-Coyrehourcq
+        
+
+
+      </div></div>
+<script src="LearningNetlogo_fichiers/head.js"></script>
+<script src="LearningNetlogo_fichiers/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      //transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+      transition: 'fade',
+           slideNumber: true,
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      {src: 'js/reveal.js/lib/js/classList.js', condition: function() {
+        return !document.body.classList;
+      }},
+      {src: 'js/reveal.js/plugin/markdown/marked.js', condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }},
+      {src: 'js/reveal.js/plugin/markdown/markdown.js', condition: function() {
+        return !!document.querySelector('[data-markdown]');
+      }},
+      {src: 'js/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() {
+        hljs.initHighlightingOnLoad();
+      }},
+      {src: 'js/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() {
+        return !!document.body.classList;
+      }},
+      {src: 'js/reveal.js/plugin/notes/notes.js', async: true, condition: function() {
+        return !!document.body.classList;
+      }}
+      ]
+    });
+
+
+</script><script type="text/javascript" src="LearningNetlogo_fichiers/highlight.js"></script><script type="text/javascript" src="LearningNetlogo_fichiers/zoom.js"></script><script type="text/javascript" src="LearningNetlogo_fichiers/notes.js"></script>
+
+
+
+</body></html>
